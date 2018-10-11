@@ -1,2 +1,2 @@
 # Rocks Paper Scissors Multiplayer 
-WEEK 7 Assignment Rutgers Coding Bootcamp
+Firebase - RPS contains more than comment changes 
