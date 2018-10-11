@@ -11,7 +11,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 //checks which player won and returns the name of the winner
-function checkWinner(p1, p2) {
+function verifyWinner(p1, p2) {
 	if (p1 == "Rock" && p2 == "Paper")
 		return "p2";
 	else if (p1 == "Rock" && p2 == "Scissors")
@@ -30,8 +30,8 @@ function checkWinner(p1, p2) {
 		return "error"
 }
 
-var p1Wins = 0;
-var p2Wins = 0;
+var player1W = 0;
+var player2w = 0;
 var ties = 0;
 
 $(document).ready(function() {
@@ -65,18 +65,18 @@ $(document).ready(function() {
 	//depends on which player won, and when a player wins it returns something
 	database.ref("/selections").on("value", function(snap) {
 		if (snap.child("p1").exists() && snap.child("p2").exists()) {
-			var winner = checkWinner(snap.child("p1").val(), snap.child("p2").val());
+			var winner = verifyWinner(snap.child("p1").val(), snap.child("p2").val());
 			console.log(winner);
 			if (winner == "p1") {
-				p1Wins++;
+				player1W++;
 				database.ref("/wins").update({
-					p1: p1Wins
+					p1: player1W
 				});
 			}
 			else if (winner == "p2") {
-				p2Wins++;
+				player2w++;
 				database.ref("/wins").update({
-					p2: p2Wins
+					p2: player2w
 				});
 			}
 			else if (winner == "tie") {
@@ -100,20 +100,20 @@ $(document).ready(function() {
 	database.ref("/wins").on("value", function(snap) {
 		if (!snap.child("p1").exists()) {
 			database.ref("/wins").update({
-				p1: p1Wins
+				p1: player1W
 			});
 		} else {
-			p1Wins = snap.child("p1").val();
-			$("#p1-wins").text(p1Wins);
+			player1W = snap.child("p1").val();
+			$("#p1-wins").text(player1W);
 		}
 		
 		if (!snap.child("p2").exists()) {
 			database.ref("/wins").update({
-				p2: p2Wins
+				p2: player2w
 			});
 		} else {
-			p2Wins = snap.child("p2").val();
-			$("#p2-wins").text(p2Wins);
+			player2w = snap.child("p2").val();
+			$("#p2-wins").text(player2w);
 		}
 
 		if (!snap.child("ties").exists()) {
