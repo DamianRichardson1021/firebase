@@ -1,16 +1,19 @@
 //initializing database
 var config = {
-	apiKey: "AIzaSyB5w4RMIQuMTdOYoLeAAXep_00_uXGkH-I",
-	authDomain: "rps-online-78554.firebaseapp.com",
-	databaseURL: "https://rps-online-78554.firebaseio.com",
+	apiKey: "AIzaSyD4lLi36YFFfSN9CQlxh_ljJi35fkdn_Sk",
+	authDomain: "first-fire-88f02.firebaseapp.com",
+	databaseURL: "https://first-fire-88f02.firebaseio.com",
 	projectId: "rps-online-78554",
-	storageBucket: "",
-	messagingSenderId: "566981574178"
+	storageBucket: "first-fire-88f02.appspot.com",
+	messagingSenderId: "49283934833"
 };
 firebase.initializeApp(config);
 var database = firebase.database();
 
 //checks which player won and returns the name of the winner
+
+//
+
 function verifyWinner(p1, p2) {
 	if (p1 == "Rock" && p2 == "Paper")
 		return "p2";
